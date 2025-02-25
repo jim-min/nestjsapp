@@ -12,7 +12,7 @@ export class PostService {
         return this.postRepository.find();
     }
 
-    async findOne(id: number): Promise<Post> {
+    async findOne(id: number): Promise<Post | null> {
         return this.postRepository.findOne({where: {id}});
     }
 
