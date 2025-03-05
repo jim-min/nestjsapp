@@ -1,7 +1,7 @@
 import { Post } from "./post.entity";
 import { CreatePostDto } from "./dto/create-post.dto";
 import { UpdatePostDto } from "./dto/update-post.dto";
-import { Injectable } from "@nestjs/common";
+import { ConflictException, Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
@@ -21,17 +21,39 @@ export class PostService {
     }
 
     async create(createPostDto: CreatePostDto): Promise<Post> {
-        const post = this.postRepository.create(createPostDto);
-        return this.postRepository.save(post);
+        try {
+            const post = this.postRepository.create(createPostDto);
+            return await this.postRepository.save(post);
+        } catch (error) {
+            if (error.code === 23505) {
+                throw new ConflictException('Post already exists');
+            }
+            throw error;
+        }
     }
 
     async update(id: number, updatePostDto: UpdatePostDto): Promise<Post | null> {
-        await this.postRepository.update(id, updatePostDto);
-        return this.postRepository.findOne({where: {id}});
+        try {
+            const result = await this.postRepository.update(id, updatePostDto);
+            if (result.affected === 0) {
+                throw new NotFoundException(`Post with ${id} not found`);
+            }
+            return this.postRepository.findOne({where: {id}});
+        } catch(error) {
+            throw error;
+        }
+        
     }
 
     async remove(id: number): Promise<void> {
-        await this.postRepository.delete(id);
+        try {
+            const result = await this.postRepository.delete(id);
+            if (result.affected === 0) {
+                throw new NotFoundException(`Post with ${id} not found`);
+            }
+        } catch(error) {
+            throw error;
+        }
     }
     
 }
