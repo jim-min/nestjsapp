@@ -1,4 +1,4 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({
   name: 'posts'
@@ -31,4 +31,12 @@ export class Post {
     name: 'author_id'
   })
   authorId: number;
+
+  @CreateDateColumn({
+    type: 'timestamp',
+    name: 'created_at',
+    nullable: false,
+    default: () => 'CURRENT_TIMESTAMP'
+  })
+  createdAt: Date;
   }
