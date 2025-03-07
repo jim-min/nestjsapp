@@ -39,4 +39,4 @@ export class Post {
     default: () => 'CURRENT_TIMESTAMP'
   })
   createdAt: Date;
-  }
+}
