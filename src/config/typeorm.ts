@@ -8,8 +8,8 @@ const config = {
     username: process.env.DB_USERNAME || 'test',
     password: process.env.DB_PASSWORD || 'test',
     database: process.env.DB_NAME || 'inflearn',
-    entities: ['dist/**/**/*.entity.js', 'src/**/**/*.entity.js'],
-    migrations: ['dist/migrations/*.js', 'src/migrations/*.js'],
+    entities: ['dist/**/**/*.entity.js'],
+    migrations: ['dist/migrations/*.js'],
     autoLoadEntities: true,
     synchronize: false,
 }
