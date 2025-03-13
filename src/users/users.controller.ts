@@ -1,6 +1,5 @@
 import { Body, Controller, Delete, Get, Put, Req, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { Request } from 'express';
 import { AccessTokenGuard } from 'src/common/guard/access-token.guard';
 import { UpdateUserDto } from './dto/update-user.dto';
 
