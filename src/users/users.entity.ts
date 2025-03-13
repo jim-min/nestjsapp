@@ -1,3 +1,4 @@
+import { BucketList } from "src/bucket-lists/entities/bucket-list.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({
