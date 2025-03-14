@@ -9,7 +9,8 @@ export class Destination {
     @Column({
         type: 'varchar',
         length: 255,
-        nullable: false
+        nullable: false,
+        unique: true
     })
     name: string;
 

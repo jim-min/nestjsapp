@@ -13,6 +13,14 @@ export class DestinationsService {
 
     // 등록
     async create(model: CreateDestinationDto) : Promise<Destination>{
+        const existDest = await this.destinationsRepository.findBy({
+            name: model.name
+        });
+
+        if (existDest.length > 0) {
+            throw new Error('이미 존재하는 여행지입니다.');
+        }
+        
         const destination = this.destinationsRepository.create(model);
 
         const createdDest = await this.destinationsRepository.save(destination);
