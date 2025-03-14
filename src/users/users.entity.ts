@@ -12,6 +12,14 @@ export class User {
         type: 'varchar',
         length: 255,
         nullable: false,
+        default: 'annoymous'
+    })
+    name: string;
+
+    @Column({
+        type: 'varchar',
+        length: 255,
+        nullable: false,
         unique: true
     })
     username: string;

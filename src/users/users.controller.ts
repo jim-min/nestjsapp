@@ -10,7 +10,7 @@ export class UsersController {
     ) {}
 
     @UseGuards(AccessTokenGuard)
-    @Get('me')
+    @Get('profile')
     async getMe(@Req() req: any){
         const userId = req.user['sub'];
         const user = await this.usersService.findbyId(userId);
@@ -19,17 +19,19 @@ export class UsersController {
     }
 
     @UseGuards(AccessTokenGuard)
-    @Put('me')
+    @Put('profile')
     async updateUser(@Req() req: any, @Body() updateUserDto: UpdateUserDto) {
         const user = await this.usersService.update(req.user['sub'], updateUserDto);
 
         return { ...user, password: undefined, refreshToken: undefined }
     }
 
-    @UseGuards(AccessTokenGuard)
-    @Delete('me')
-    async deleteUser(@Req() req: any) {
-        await this.usersService.remove(req.user['sub']);
-    }
+    // DELETE는 하지 않겠습니다
+    
+    // @UseGuards(AccessTokenGuard)
+    // @Delete('profile')
+    // async deleteUser(@Req() req: any) {
+    //     await this.usersService.remove(req.user['sub']);
+    // }
 }
 
