@@ -10,6 +10,7 @@ import { User } from 'src/users/users.entity';
     TypeOrmModule.forFeature([BucketList, User])
   ],
   controllers: [BucketListsController],
-  providers: [BucketListsService]
+  providers: [BucketListsService],
+  exports: [BucketListsService],
 })
 export class BucketListsModule {}
