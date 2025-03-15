@@ -24,14 +24,14 @@ export class AuthController {
     @UseGuards(AccessTokenGuard)
     @Get('signout')
     signOut(@Req() req: any) {
-        const userId = req.user['sub'];
+        const userId = req.user['id'];
         this.authService.signOut(userId);
     }
 
     @UseGuards(RefreshTokenGuard)
     @Get('refresh')
     refreshAllTokens(@Req() req: any) {
-        const userId = req.user['sub'];
+        const userId = req.user['id'];
         const refreshToken = req.user['refreshToken'];
 
         return this.authService.refreshAllTokens(userId, refreshToken);
