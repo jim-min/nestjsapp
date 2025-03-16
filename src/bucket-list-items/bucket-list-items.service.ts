@@ -67,8 +67,9 @@ export class BucketListItemsService {
                     user: {
                         id: userId,
                     },
-                }
-            }
+                },
+            },
+            relations: ['destination']
         });
     }
 
