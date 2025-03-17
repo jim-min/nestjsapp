@@ -26,4 +26,3 @@ export class AccessTokenStrategy extends PassportStrategy(
         return payload;
     }
 }
-
